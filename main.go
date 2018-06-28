@@ -3,6 +3,7 @@ package main
 import (
 	"flag"
 	"io/ioutil"
+	"log"
 	"net/http"
 )
 
@@ -21,6 +22,7 @@ func main() {
 	m := http.NewServeMux()
 	m.HandleFunc(path, func(w http.ResponseWriter, r *http.Request) {
 		defer r.Body.Close()
+		log.Print(r.Header)
 		w.WriteHeader(http.StatusOK)
 		b, err := ioutil.ReadAll(r.Body)
 		if err != nil {
